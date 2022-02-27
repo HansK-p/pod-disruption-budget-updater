@@ -1,0 +1,26 @@
+---
+apiVersion: poddisruptionbudgetupdater.k8s.faith/v1alpha1
+kind: PodDisruptionBudgetUpdater
+metadata:
+  name: ecp-edx
+  namespace: test
+spec:
+  podDisruptionBudgets:
+  - ecp-endpoint
+# - edx-toolbox
+  default:
+    settings:
+      minAvailable: 0
+  rules:
+  - periods:
+    - from: "22:36:14"
+      to: "22:37:14"
+    - from: "21:38:14"
+      to: "21:39:14"
+    settings:
+      minAvailable: 1
+  - periods:
+    - from: "00:00:14"
+      to: "00:01:14"
+    settings:
+      minAvailable: "50%"

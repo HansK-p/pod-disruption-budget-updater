@@ -1,0 +1,24 @@
+# permissions for end users to edit poddisruptionbudgetupdaters.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: poddisruptionbudgetupdater-editor-role
+rules:
+- apiGroups:
+  - poddisruptionbudgetupdater.k8s.faith
+  resources:
+  - poddisruptionbudgetupdaters
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - poddisruptionbudgetupdater.k8s.faith
+  resources:
+  - poddisruptionbudgetupdaters/status
+  verbs:
+  - get

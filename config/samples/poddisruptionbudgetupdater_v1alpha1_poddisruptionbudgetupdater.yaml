@@ -1,0 +1,6 @@
+apiVersion: poddisruptionbudgetupdater.k8s.faith/v1alpha1
+kind: PodDisruptionBudgetUpdater
+metadata:
+  name: poddisruptionbudgetupdater-sample
+spec:
+  # TODO(user): Add fields here

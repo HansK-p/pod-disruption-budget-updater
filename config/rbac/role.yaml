@@ -1,0 +1,33 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: manager-role
+rules:
+- apiGroups:
+  - poddisruptionbudgetupdater.k8s.faith
+  resources:
+  - poddisruptionbudgetupdaters
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - poddisruptionbudgetupdater.k8s.faith
+  resources:
+  - poddisruptionbudgetupdaters/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - poddisruptionbudgetupdater.k8s.faith
+  resources:
+  - poddisruptionbudgetupdaters/status
+  verbs:
+  - get
+  - patch
+  - update

@@ -1,0 +1,20 @@
+# permissions for end users to view poddisruptionbudgetupdaters.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: poddisruptionbudgetupdater-viewer-role
+rules:
+- apiGroups:
+  - poddisruptionbudgetupdater.k8s.faith
+  resources:
+  - poddisruptionbudgetupdaters
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - poddisruptionbudgetupdater.k8s.faith
+  resources:
+  - poddisruptionbudgetupdaters/status
+  verbs:
+  - get

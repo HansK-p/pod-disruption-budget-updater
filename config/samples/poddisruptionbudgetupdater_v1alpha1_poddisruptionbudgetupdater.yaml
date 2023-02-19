@@ -1,6 +1,12 @@
 apiVersion: poddisruptionbudgetupdater.k8s.faith/v1alpha1
 kind: PodDisruptionBudgetUpdater
 metadata:
+  labels:
+    app.kubernetes.io/name: poddisruptionbudgetupdater
+    app.kubernetes.io/instance: poddisruptionbudgetupdater-sample
+    app.kubernetes.io/part-of: pod-disruption-budget-updater
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: pod-disruption-budget-updater
   name: poddisruptionbudgetupdater-sample
 spec:
   # TODO(user): Add fields here

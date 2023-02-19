@@ -1,5 +1,5 @@
 /*
-Copyright 2022.
+Copyright 2023.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/handler"
 	"sigs.k8s.io/controller-runtime/pkg/log"
-	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	"sigs.k8s.io/controller-runtime/pkg/source"
 
 	poddisruptionbudgetupdaterv1alpha1 "pod-disruption-budget-updater/api/v1alpha1"
@@ -51,7 +50,7 @@ type PodDisruptionBudgetUpdaterReconciler struct {
 // the user.
 //
 // For more details, check Reconcile and its Result here:
-// - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.11.0/pkg/reconcile
+// - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.13.0/pkg/reconcile
 func (r *PodDisruptionBudgetUpdaterReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	reqLogger := log.FromContext(ctx).WithValues("poddisruptionbudgetupdate", req.NamespacedName)
 
@@ -65,10 +64,10 @@ func (r *PodDisruptionBudgetUpdaterReconciler) Reconcile(ctx context.Context, re
 		if errors.IsNotFound(err) {
 			reqLogger.V(1).Info("Request crd object with namespaced name in request not found. It must have been deleted")
 			updateScheduler.removeSchedule(reqLogger, req.Namespace, req.Name)
-			return reconcile.Result{}, nil
+			return ctrl.Result{}, nil
 		}
 		reqLogger.V(0).Error(err, "Requeue request after error reading the CR object with namespaced name %s")
-		return reconcile.Result{}, err
+		return ctrl.Result{}, err
 	}
 	err = reconcileCrd(reqLogger, ctx, r, req, instance)
 	if err != nil {
@@ -76,7 +75,7 @@ func (r *PodDisruptionBudgetUpdaterReconciler) Reconcile(ctx context.Context, re
 	} else {
 		reqLogger.V(2).Info("No issues found during reconcile")
 	}
-	return reconcile.Result{}, err
+	return ctrl.Result{}, err
 }
 
 // SetupWithManager sets up the controller with the Manager.
